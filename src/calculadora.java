@@ -111,7 +111,7 @@ public class calculadora extends JFrame implements ActionListener{
 		botones.add(borrar);
 		panel.add(borrar);
 		
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 7; i++) {
 			if (i % 2 == 0) {
 				posy = i*16;
 				JButton a = new JButton();
@@ -147,6 +147,9 @@ public class calculadora extends JFrame implements ActionListener{
 		botones2.get(5).setText(")");
 		botones2.get(5).setActionCommand(")");
 		botones2.get(5).addActionListener(this);
+		botones2.get(6).setText("¬");
+		botones2.get(6).setActionCommand("¬");
+		botones2.get(6).addActionListener(this);
 	}
 
 	@Override
@@ -183,6 +186,10 @@ public class calculadora extends JFrame implements ActionListener{
 		}
 		if (e.getActionCommand().equals(")")) {
 			mostrar+= ")";
+			lblNewLabel.setText(mostrar);
+		}
+		if(e.getActionCommand().equals("¬")) {
+			mostrar = mostrar.substring(0, mostrar.length()-1);
 			lblNewLabel.setText(mostrar);
 		}
 	}
