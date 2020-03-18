@@ -240,8 +240,12 @@ public class calculadora extends JFrame implements ActionListener{
 			lblNewLabel.setText(mostrar);
 		}
 		if(e.getActionCommand().equals("¬")) {
+			try {
 			mostrar = mostrar.substring(0, mostrar.length()-1);
 			lblNewLabel.setText(mostrar);
+			}catch(Exception ex) {
+				
+			}
 		}
 		if(e.getActionCommand().equals("M")) {
 			mostrar= ans;
