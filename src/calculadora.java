@@ -149,7 +149,7 @@ public class calculadora extends JFrame implements ActionListener{
 		botones2.get(4).setText("¬");
 		botones2.get(4).setActionCommand("¬");
 		botones2.get(4).addActionListener(this);
-		botones2.get(5).setText("M");
+		botones2.get(5).setText("M");  // Equivalente al Ans de la calculadora
 		botones2.get(5).setActionCommand("M");
 		botones2.get(5).addActionListener(this);
 	}
@@ -170,38 +170,40 @@ public class calculadora extends JFrame implements ActionListener{
 		if (e.getActionCommand().equals("borrar")) {
 			mostrar=" ";
 			lblNewLabel.setText(mostrar);
+			operacion = ' ';
 		}
 		if (e.getActionCommand().equals("igual")) {
-			if(!lblNewLabel.getText().isEmpty()) {
+			if (!lblNewLabel.getText().isBlank() && !lblNewLabel.getText().isEmpty()) {
 				num2 = Double.parseDouble(lblNewLabel.getText());
 				res = true;
-			}
-			switch (operacion) {
-			case '+': 
-				mostrar= String.valueOf(num1+num2);
-				lblNewLabel.setText(mostrar);
-				break;
-			case '-':
-				mostrar= String.valueOf(num1-num2);
-				lblNewLabel.setText(mostrar);
-				break;
-			case '/':
-				if(num2!=0) {
-					mostrar= String.valueOf(num1/num2);
+				switch (operacion) {
+				case '+':
+					mostrar = String.valueOf(num1 + num2);
 					lblNewLabel.setText(mostrar);
-				}else {
-					mostrar= "Syntax error";
+					break;
+				case '-':
+					mostrar = String.valueOf(num1 - num2);
 					lblNewLabel.setText(mostrar);
+					break;
+				case '/':
+					if (num2 != 0) {
+						mostrar = String.valueOf(num1 / num2);
+						lblNewLabel.setText(mostrar);
+					} else {
+						mostrar = "Syntax error";
+						lblNewLabel.setText(mostrar);
+					}
+					break;
+				case '*':
+					mostrar = String.valueOf(num1 * num2);
+					lblNewLabel.setText(mostrar);
+					break;
+				case ' ':
+					mostrar = "";
+					break;
+				default:
+					throw new IllegalArgumentException("Unexpected value: " + operacion);
 				}
-				break;
-			case '*':
-				mostrar= String.valueOf(num1*num2);
-				lblNewLabel.setText(mostrar);
-				break;
-			case' ':
-				break;
-			default:
-				throw new IllegalArgumentException("Unexpected value: " + operacion);
 			}
 			ans = mostrar;
 			num1 =0;
@@ -209,11 +211,12 @@ public class calculadora extends JFrame implements ActionListener{
 			operacion = ' ';
 		}
 		if (e.getActionCommand().equals("sumar")) {
-			if(!lblNewLabel.getText().isEmpty() && !lblNewLabel.getText().equals("Syntax error"))
+			if(!lblNewLabel.getText().isEmpty() && !lblNewLabel.getText().equals("Syntax error")) {
 				num1 = Double.parseDouble(lblNewLabel.getText());
 			operacion = '+';
 			mostrar= "";
 			lblNewLabel.setText(mostrar);
+			}
 		}
 		if (e.getActionCommand().equals("restar")) {
 			if(!lblNewLabel.getText().isEmpty() && !lblNewLabel.getText().equals("Syntax error"))
